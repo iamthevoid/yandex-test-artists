@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">artists</string>
+    <string name="server_data">tasty_server_data</string>
+    <string name="selected_artist_json">selected_artist_from_artist_list_activity_integer</string>
+    <string name="selected_artist">selected_artist_from_artist_list_activity_parcelable</string>
+    <string name="biography">Биография</string>
+</resources>
