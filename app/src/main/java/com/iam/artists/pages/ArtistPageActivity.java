@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.iam.artists.R;
 import com.iam.artists.entities.Artist;
 import com.iam.artists.utils.Decorator;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +26,7 @@ public class ArtistPageActivity extends AppCompatActivity {
      * data for customizing views
      */
     private Artist artist;
-    private DisplayImageOptions imageOptions; // UniversalImageLoader lib for increase app performance
+//    private DisplayImageOptions imageOptions; // UniversalImageLoader lib for increase app performance
 
     /**
      * Views
@@ -42,7 +41,7 @@ public class ArtistPageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.artist_page_activity);
-        imageOptions = Decorator.imageOptions();
+//        imageOptions = Decorator.imageOptions();
 
         Decorator.setStatusBarColor(this);
 
@@ -73,7 +72,8 @@ public class ArtistPageActivity extends AppCompatActivity {
         // Customize logo - binding with xml, setting height based on screen width and aspect ratio, and loading image into it
         image = (ImageView) findViewById(R.id.image);
         Decorator.setHeight(image, Decorator.heightByWidthUsesAspectRatio(Decorator.screenWidth(this), 16, 9));
-        ImageLoader.getInstance().displayImage(artist.cover().big(), image, imageOptions);
+        Glide.with(this).load(artist.cover().small()).into(image);
+//        ImageLoader.getInstance().displayImage(artist.cover().big(), image, imageOptions);
 
         // customize text views
         genres = (TextView) findViewById(R.id.genres);

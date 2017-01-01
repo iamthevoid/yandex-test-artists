@@ -11,8 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.iam.artists.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 /**
  * Util class for simplify design features
@@ -44,15 +42,6 @@ public class Decorator {
 
     public static void setHeight(View view, int height) {
         view.getLayoutParams().height = height;
-    }
-
-    public static DisplayImageOptions imageOptions() {
-        return new DisplayImageOptions.Builder()
-                .delayBeforeLoading(1000)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-                .build();
     }
 
     public static void setStatusBarColor(Activity activity){

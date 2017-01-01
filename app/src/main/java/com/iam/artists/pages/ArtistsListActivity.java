@@ -2,7 +2,6 @@ package com.iam.artists.pages;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,13 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.iam.artists.R;
 import com.iam.artists.entities.Artist;
 import com.iam.artists.utils.Decorator;
 import com.iam.artists.utils.Web;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,11 +43,6 @@ public class ArtistsListActivity extends AppCompatActivity {
 
     private ArrayList<Artist> artists = new ArrayList<>();
 
-    /**
-     * data for customizing views
-     */
-
-    private DisplayImageOptions imageOptions; // UniversalImageLoader lib for increase app performance
 
     /**
      * views
@@ -69,8 +61,6 @@ public class ArtistsListActivity extends AppCompatActivity {
 
         // setting bpcount in 0 on each activity onCreate
         bpCount = 0;
-
-        imageOptions = Decorator.imageOptions();
 
         artistsRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -193,20 +183,11 @@ public class ArtistsListActivity extends AppCompatActivity {
 
             public void onBind(final int position) {
                 final Artist artist = list.get(position);
-                ImageLoader.getInstance().displayImage(artist.cover().small(), image, imageOptions, new SimpleImageLoadingListener() {
-                    @Override
-                    public void onLoadingStarted(String imageUri, View view) {
-                        super.onLoadingStarted(imageUri, view);
-                        image.setImageDrawable(new ColorDrawable(getResources().getColor(R.color.clear)));
-                        ArtistVH.this.progressBar.setVisibility(View.VISIBLE);
-                    }
 
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        super.onLoadingComplete(imageUri, view, loadedImage);
-                        ArtistVH.this.progressBar.setVisibility(View.INVISIBLE);
-                    }
-                });
+                Glide.with(ArtistsListActivity.this)
+                        .load(artist.cover().small())
+                        .error(new ColorDrawable(0xff000000 + artist.name().hashCode() % 0x1000000))
+                        .into(image);
                 name.setText(artist.name());
                 genres.setText(artist.genres());
                 tracks.setText(artist.tracks());

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/artists.iml" filepath="$PROJECT_DIR$/artists.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yandex-test-artists.iml" filepath="$PROJECT_DIR$/yandex-test-artists.iml" />
     </modules>
   </component>
 </project>
